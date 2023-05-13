@@ -1,5 +1,8 @@
 import streamlit as st
 from PIL import Image
+from Imgur import generate_url as gu
+
+import os
 
 # set the title of the web app
 st.title("Real State Marketplace Recommender")
@@ -22,8 +25,14 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 
 # Display the uploaded photo
 if uploaded_file is not None:
+    img = uploaded_file.read()
+
     image = Image.open(uploaded_file)
 
     st.image(image, caption='Uploaded image')
+
+
+
+    st.write(f'{gu.uploadToBlobStorage2(img, os.path.splitext(uploaded_file.name)[-1] )}')
 
 

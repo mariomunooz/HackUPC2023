@@ -1,4 +1,5 @@
 from azure.storage.blob import BlobServiceClient
+from datetime import datetime
 
 storage_account_key = "9ySS1QeMCWCmxhQHynGjmq0fAZ5Nm8S1xTsc1uAA+o+AIxwoZc2qvzxlt65O4HqAgcfAYOdEA/W8+AStbBzmRQ=="
 storage_account_name = "hackupc"
@@ -14,4 +15,20 @@ def uploadToBlobStorage(file_path, file_name):
 
     print(f"uploaded {file_name} file")
 
-uploadToBlobStorage('C:\\Users\\user\\Documents\\GitHub\\HackUPC2023\\Imgur\\rentalia-medium-devices-spring.jpg', 'image1.jpg')
+    return blob_client.url
+
+
+
+def uploadToBlobStorage2(image, extension):
+
+    now = datetime.now()
+    current_time = now.strftime("%Y_%m_%d_t_%H_%M_%S.%f")
+
+    blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+    blob_client = blob_service_client.get_blob_client(container= container_name, blob= f'image_{current_time}{extension}')
+
+    print(type(image))
+
+    blob_client.upload_blob(image)
+
+    return blob_client.url
