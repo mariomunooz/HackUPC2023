@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 # set the title of the web app
 st.title("Real State Marketplace Recommender")
