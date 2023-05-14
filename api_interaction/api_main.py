@@ -11,13 +11,13 @@ def get_data_from_image(image_url):
     for api_solution in api_methods:
         payload = {
             # Add the client key to the parameters dictionary
-            "client_key": "2882ce7dd9bdae86831d8c60783bf22e1160b02facdc768494e872e387838f73",
+            "client_key": st.secrets["client_key"],
             "model_id": api_solution,
             "image_url": image_url
         }
         headers = {
-            "X-Client-ID": "01a9a73e",
-            "X-Property-ID": "637f2e8ab2cc"
+            "X-Client-ID": st.secrets["X_Client_ID"],
+            "X-Property-ID": st.secrets["X_Property_ID"]
         }
 
         response = requests.get(endpoint, params=payload, headers=headers)
