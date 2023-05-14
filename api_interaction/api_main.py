@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+import streamlit as st
 
 endpoint = 'https://api-eu.restb.ai/vision/v2/multipredict'
 
