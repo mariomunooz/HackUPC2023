@@ -72,6 +72,7 @@ def get_attributes_from_data(image_data):
 
 
 def create_estate_description(image_urls):
+    list_recomendations = ["idealista", "fotocasa","airbnb","Apartaments.com","Homes & Villas by Marriott","VOB | Luxary Property Managment"]
     caption_description = "This house offers"
     counter_score = 0
     score = 0
@@ -80,20 +81,13 @@ def create_estate_description(image_urls):
         data = get_data_from_image(image_url)
         info_photo = get_attributes_from_data(data)
         caption_description +=  info_photo.get('caption') + ","
-        print(info_photo)
         if info_photo.get('score'):
-            score += info_photo.get('score')
+            score += 7-info_photo.get('score')
             counter_score += 1
     caption_description = caption_description.rstrip(caption_description[-1])+"."
+    recomendation = str(list_recomendations[round(score/counter_score)])
     score = (score/counter_score)*10/6
-    socre_description = "the aproximize score of the house is "+str(score)
-    print(caption_description+socre_description)
+    socre_description = " The approximate score of the house is "+str(round(score, 2))
+    return caption_description+socre_description, recomendation
 
-    return caption_description+socre_description
 
-"""url1 = "https://decoracion2.com/imagenes/2014/10/habitacion-grande-1200x890.jpg"
-url2 = "https://media.istockphoto.com/id/1276481211/es/foto/dise%C3%B1o-interior-de-la-cocina-con-la-foto-de-la-salpicadura-de-la-espalda-blanca.jpg?s=612x612&w=0&k=20&c=z12TAenPtivwKlukocmg4c01Z-8lNFjzSRRtXX2DoyQ="
-url3 = "https://images.hola.com/imagenes/decoracion/20210906194157/salones-modernos-acogedores-am/0-982-568/salon-moderno-2m-m.jpg?tx=w_680"
-url4 = "https://www.viviendasaludable.es/wp-content/uploads/2019/02/organizar-el-jardin-1.jpg"
-image_urls = {url1,url2,url3,url4}
-create_estate_description(image_urls)"""
